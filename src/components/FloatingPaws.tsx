@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
-const emojis = ["🐾", "🐱", "🐶"];
-
+const emojis = ["🐾", "🐱", "🐶", "🐰"];
 interface Paw {
   id: number;
   emoji: string;
