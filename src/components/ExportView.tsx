@@ -18,11 +18,11 @@ export function ExportView({ people, year, onBack }: ExportViewProps) {
         <h1 className="text-2xl font-bold text-primary">לוח שנה {year}</h1>
         <Button onClick={handlePrint}>הדפסה / ייצוא PDF</Button>
       </div>
-      <div className="print-area bg-card p-6 rounded-lg border max-w-[210mm] mx-auto" dir="rtl">
-        <h1 className="text-2xl font-bold text-primary text-center mb-4 print:mb-3">
+      <div className="print-area bg-card p-4 rounded-lg border max-w-[210mm] mx-auto" dir="rtl">
+        <h1 className="text-lg font-bold text-primary text-center mb-2 print:mb-1">
           לוח שנה — {year}
         </h1>
-        <div className="flex gap-4 justify-center mb-4 no-print">
+        <div className="flex gap-4 justify-center mb-2 no-print">
           <div className="flex items-center gap-2">
             <div className="w-4 h-1 bg-holiday rounded" />
             <span className="text-xs text-muted-foreground">חג</span>
