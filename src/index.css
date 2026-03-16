@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -42,26 +42,44 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-surface text-foreground font-sans;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Gisha', 'Inter', sans-serif;
   }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation-name: float;
 }
 
 @media print {
   body {
-    background: white !important;
+    background: rgb(161, 25, 143) !important;
   }
+
   .no-print {
     display: none !important;
   }
+
   .print-area {
     margin: 0;
-    padding: 5mm 10mm;
+    padding: 0mm 5mm 5mm;
     border: none !important;
     box-shadow: none !important;
   }
+
   @page {
-    margin: 3mm;
+    margin: 5mm;
   }
 }

@@ -39,38 +39,38 @@ export function PersonForm({ open, onOpenChange, person, onSave }: PersonFormPro
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-card">
-        <DialogHeader>
-          <DialogTitle className="text-primary font-semibold">
-            {person ? "Edit Person" : "Add Person"}
+      <DialogContent className="bg-card" dir="rtl">
+        <DialogHeader className="" >
+          <DialogTitle className="text-primary font-semibold text-right">
+            {person ? "עריכת עובד" : "הוספת עובד"}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">First Name</Label>
+              <Label htmlFor="name">שם פרטי</Label>
               <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lastName">Last Name</Label>
+              <Label htmlFor="lastName">שם משפחה</Label>
               <Input id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} required />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="birthday">Birthday</Label>
+              <Label htmlFor="birthday">יום הולדת</Label>
               <Input id="birthday" type="date" value={birthday} onChange={e => setBirthday(e.target.value)} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="startedWorking">Started Working</Label>
+              <Label htmlFor="startedWorking">תאריך תחילת עבודה</Label>
               <Input id="startedWorking" type="date" value={startedWorking} onChange={e => setStartedWorking(e.target.value)} required />
             </div>
           </div>
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-start gap-2 pt-2">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              ביטול
             </Button>
-            <Button type="submit">Save</Button>
+            <Button type="submit">שמירה</Button>
           </div>
         </form>
       </DialogContent>
