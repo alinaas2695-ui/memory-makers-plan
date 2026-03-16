@@ -46,7 +46,7 @@ export function PersonForm({ open, onOpenChange, person, onSave }: PersonFormPro
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">שם פרטי</Label>
               <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
@@ -56,7 +56,7 @@ export function PersonForm({ open, onOpenChange, person, onSave }: PersonFormPro
               <Input id="lastName" value={lastName} onChange={e => setLastName(e.target.value)} required />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="birthday">יום הולדת</Label>
               <Input id="birthday" type="date" value={birthday} onChange={e => setBirthday(e.target.value)} required />

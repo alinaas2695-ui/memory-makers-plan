@@ -90,7 +90,7 @@ const Index = () => {
 
   if (view === "export") {
     return (
-      <div className="min-h-screen p-6" dir="rtl">
+      <div className="min-h-screen p-3 sm:p-6" dir="rtl">
         <FloatingPaws />
         <ExportView people={people} year={exportYear} onBack={() => setView("manage")} />
       </div>
@@ -98,19 +98,19 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen p-6 max-w-5xl mx-auto" dir="rtl">
+    <div className="min-h-screen p-3 sm:p-6 max-w-5xl mx-auto" dir="rtl">
       <FloatingPaws />
-      <div className="flex items-center justify-between mb-8 sticky top-0 bg-white border rounded-lg px-6 py-4 z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 sticky top-0 bg-white border rounded-lg px-4 sm:px-6 py-3 sm:py-4 z-10 gap-3">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-primary">לוח שנה צוות אנימד</h1>
-          <img src={animedLogo} alt="Animed Logo" className="h-10 object-contain bg-white" />
+          <h1 className="text-lg sm:text-2xl font-bold text-primary">לוח שנה צוות אנימד</h1>
+          <img src={animedLogo} alt="Animed Logo" className="h-8 sm:h-10 object-contain bg-white" />
         </div>
-        <div className="flex gap-3 items-center flex-wrap justify-end">
+        <div className="flex gap-2 sm:gap-3 items-center flex-wrap justify-end">
           <div className="flex items-center gap-2">
             <label className="text-sm text-muted-foreground whitespace-nowrap">שנה:</label>
             <Input
               type="number"
-              className="w-24 text-left font-mono"
+              className="w-20 sm:w-24 text-left font-mono"
               value={exportYear}
               onChange={e => setExportYear(Number(e.target.value))}
               dir="ltr"

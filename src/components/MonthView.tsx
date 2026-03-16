@@ -119,7 +119,7 @@ export function MonthView({ year, month, people }: MonthViewProps) {
           {groups.map((group) => (
             <div
               key={group.day}
-              className="w-[110px] print:w-[90px] min-h-[80px] print:min-h-[55px] border rounded p-1 print:p-1 flex flex-col justify-start bg-card shadow-sm print:shadow-none"
+              className="w-[90px] sm:w-[110px] print:w-[90px] min-h-[80px] print:min-h-[55px] border rounded p-1 print:p-1 flex flex-col justify-start bg-card shadow-sm print:shadow-none"
             >
               <div className="text-[10px] print:text-[8.5px] font-semibold text-muted-foreground px-0.5 pb-1">{group.day}</div>
               <div className="flex-1 flex flex-col justify-start gap-1 print:gap-0.5">

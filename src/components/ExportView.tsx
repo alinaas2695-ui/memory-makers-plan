@@ -14,15 +14,15 @@ export function ExportView({ people, year, onBack }: ExportViewProps) {
 
   return (
     <div dir="rtl">
-      <div className="no-print flex items-center justify-between mb-6 sticky top-0 bg-surface py-4 z-10 w-full max-w-5xl mx-auto">
+      <div className="no-print flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 sticky top-0 bg-surface py-3 sm:py-4 z-10 w-full max-w-5xl mx-auto gap-3">
         <Button variant="outline" onClick={onBack}>← חזרה לרשימה</Button>
-        <div className="flex items-center gap-3 bg-white px-6 py-4 rounded-lg border">
-          <h1 className="text-2xl font-bold text-primary">לוח שנה צוות אנימד - {year}</h1>
-          <img src={animedLogo} alt="Animed Logo" className="h-10 object-contain bg-white" />
+        <div className="flex items-center gap-3 bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg border">
+          <h1 className="text-lg sm:text-2xl font-bold text-primary">לוח שנה צוות אנימד - {year}</h1>
+          <img src={animedLogo} alt="Animed Logo" className="h-8 sm:h-10 object-contain bg-white" />
         </div>
         <Button onClick={handlePrint}>הדפסה / ייצוא PDF</Button>
       </div>
-      <div className="print-area bg-card p-4 print:p-0 rounded-lg border max-w-[210mm] mx-auto relative overflow-hidden">
+      <div className="print-area bg-card p-4 print:p-0 rounded-lg border max-w-[210mm] mx-auto relative overflow-x-auto">
         <div className="hidden print:flex w-full items-center justify-center gap-3 mb-4">
           <img src={animedLogo} alt="Animed Logo" className="h-12 object-contain bg-white" />
           <h1 className="text-xl font-bold text-primary">
