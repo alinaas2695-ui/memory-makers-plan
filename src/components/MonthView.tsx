@@ -7,15 +7,14 @@ interface MonthViewProps {
   people: Person[];
 }
 
-const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
+const MONTH_NAMES_HE = [
+  "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
+  "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר",
 ];
 
 function getEventsForMonth(year: number, month: number, people: Person[]): CalendarEvent[] {
   const events: CalendarEvent[] = [];
 
-  // Add holidays
   const holidays = getHolidaysForMonth(year, month);
   for (const h of holidays) {
     events.push({
@@ -27,7 +26,6 @@ function getEventsForMonth(year: number, month: number, people: Person[]): Calen
     });
   }
 
-  // Add birthdays
   for (const person of people) {
     const bd = new Date(person.birthday);
     if (bd.getMonth() === month) {
@@ -37,12 +35,11 @@ function getEventsForMonth(year: number, month: number, people: Person[]): Calen
         day: bd.getDate(),
         month,
         title: `${person.name} ${person.lastName}`,
-        subtitle: `Birthday (${age})`,
+        subtitle: `יום הולדת (${age})`,
         type: "birthday",
       });
     }
 
-    // Work anniversaries
     const sw = new Date(person.startedWorking);
     if (sw.getMonth() === month && sw.getFullYear() !== year) {
       const years = year - sw.getFullYear();
@@ -51,15 +48,13 @@ function getEventsForMonth(year: number, month: number, people: Person[]): Calen
         day: sw.getDate(),
         month,
         title: `${person.name} ${person.lastName}`,
-        subtitle: `${years} year${years > 1 ? "s" : ""} anniversary`,
+        subtitle: `${years} שנ${years > 1 ? "ים" : "ה"} עבודה`,
         type: "anniversary",
       });
     }
   }
 
-  // Sort by day
   events.sort((a, b) => a.day - b.day);
-
   return events;
 }
 
@@ -75,29 +70,37 @@ const bgColorMap = {
   anniversary: "bg-anniversary/10",
 };
 
+const typeLabels: Record<string, string> = {
+  holiday: "חג",
+  birthday: "יום הולדת",
+  anniversary: "יום שנה",
+};
+
 export function MonthView({ year, month, people }: MonthViewProps) {
   const events = getEventsForMonth(year, month, people);
 
   if (events.length === 0) return null;
 
   return (
-    <div className="mb-8 break-inside-avoid">
-      <h2 className="text-xl font-semibold text-primary text-center mb-4">
-        {MONTH_NAMES[month]}
-      </h2>
-      <div className="flex flex-wrap gap-3 justify-center">
-        {events.map((event, i) => (
-          <div
-            key={`${event.type}-${event.day}-${i}`}
-            className={`w-[110px] h-[110px] border rounded-md p-2 flex flex-col justify-between border-t-4 ${borderColorMap[event.type]} ${bgColorMap[event.type]}`}
-          >
-            <div className="text-xs font-semibold text-muted-foreground">{event.day}</div>
-            <div className="text-xs font-semibold text-center leading-tight">{event.title}</div>
-            <div className="text-[10px] text-muted-foreground text-center">
-              {event.subtitle ?? event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+    <div className="mb-2 break-inside-avoid" dir="rtl">
+      <div className="flex items-start gap-3 flex-wrap">
+        <h2 className="text-base font-bold text-primary whitespace-nowrap py-1 min-w-[70px]">
+          {MONTH_NAMES_HE[month]}
+        </h2>
+        <div className="flex flex-wrap gap-1.5 flex-1">
+          {events.map((event, i) => (
+            <div
+              key={`${event.type}-${event.day}-${i}`}
+              className={`w-[100px] h-[90px] border rounded-md p-1.5 flex flex-col justify-between border-t-4 ${borderColorMap[event.type]} ${bgColorMap[event.type]}`}
+            >
+              <div className="text-[10px] font-semibold text-muted-foreground">{event.day}</div>
+              <div className="text-[10px] font-semibold text-center leading-tight">{event.title}</div>
+              <div className="text-[9px] text-muted-foreground text-center">
+                {event.subtitle ?? typeLabels[event.type]}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
