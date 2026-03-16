@@ -57,6 +57,11 @@
   }
   .print-area {
     margin: 0;
-    padding: 20mm;
+    padding: 5mm 10mm;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  @page {
+    margin: 3mm;
   }
 }
