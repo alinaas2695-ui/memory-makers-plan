@@ -104,23 +104,23 @@ export function MonthView({ year, month, people }: MonthViewProps) {
   if (groups.length === 0) return null;
 
   return (
-    <div className="mb-1 break-inside-avoid" dir="rtl">
-      <div className="flex items-start gap-2 flex-wrap">
-        <h2 className="text-sm font-bold text-primary whitespace-nowrap py-0.5 min-w-[55px]">
+    <div className="mb-2 break-inside-avoid" dir="rtl">
+      <div className="flex items-start gap-3 flex-wrap">
+        <h2 className="text-base font-bold text-primary whitespace-nowrap py-1 min-w-[60px]">
           {MONTH_NAMES_HE[month]}
         </h2>
-        <div className="flex flex-wrap gap-1 flex-1">
+        <div className="flex flex-wrap gap-1.5 flex-1">
           {groups.map((group) => (
             <div
               key={group.day}
-              className={`w-[95px] min-h-[70px] border rounded p-1 flex flex-col justify-between border-t-[3px] ${borderColorMap[group.primaryType]} ${bgColorMap[group.primaryType]}`}
+              className={`w-[110px] min-h-[80px] border rounded p-1.5 flex flex-col justify-between border-t-[3px] ${borderColorMap[group.primaryType]} ${bgColorMap[group.primaryType]}`}
             >
-              <div className="text-[9px] font-semibold text-muted-foreground">{group.day}</div>
+              <div className="text-[10px] font-semibold text-muted-foreground">{group.day}</div>
               <div className="flex-1 flex flex-col justify-center gap-0.5">
                 {group.events.map((event, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-[9px] font-semibold leading-tight">{event.title}</div>
-                    <div className="text-[8px] text-muted-foreground leading-tight">
+                    <div className="text-[10px] font-semibold leading-tight">{event.title}</div>
+                    <div className="text-[9px] text-muted-foreground leading-tight">
                       {event.subtitle ?? typeLabels[event.type]}
                     </div>
                   </div>
