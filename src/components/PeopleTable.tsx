@@ -29,34 +29,34 @@ export function PeopleTable({ people, onEdit, onRemove }: PeopleTableProps) {
       <Table>
         <TableHeader>
           <TableRow className="bg-primary/5 hover:bg-primary/5">
-            <TableHead className="font-semibold">Name</TableHead>
-            <TableHead className="font-semibold">Birthday</TableHead>
-            <TableHead className="font-semibold">Started Working</TableHead>
-            <TableHead className="font-semibold text-right">Actions</TableHead>
+            <TableHead className="font-semibold text-right">שם</TableHead>
+            <TableHead className="font-semibold text-right">יום הולדת</TableHead>
+            <TableHead className="font-semibold text-right">תאריך תחילת עבודה</TableHead>
+            <TableHead className="font-semibold text-left">פעולות</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {people.length === 0 && (
             <TableRow>
               <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                No people added yet. Click "Add Person" to get started.
+                לא נוספו עובדים עדיין. לחץ "+ הוסף עובד" כדי להתחיל.
               </TableCell>
             </TableRow>
           )}
           {people.map((person) => (
             <TableRow key={person.id} className="hover:bg-muted/50">
-              <TableCell className="font-medium">
+              <TableCell className="font-medium text-right">
                 {person.name} {person.lastName}
               </TableCell>
-              <TableCell>{formatDate(person.birthday)}</TableCell>
-              <TableCell>{formatDate(person.startedWorking)}</TableCell>
-              <TableCell className="text-right">
-                <div className="flex justify-end gap-2">
+              <TableCell className="text-right">{formatDate(person.birthday)}</TableCell>
+              <TableCell className="text-right">{formatDate(person.startedWorking)}</TableCell>
+              <TableCell className="text-left">
+                <div className="flex justify-start gap-2" dir="ltr">
                   <Button variant="outline" size="sm" onClick={() => onEdit(person)}>
-                    Edit
+                    עריכה
                   </Button>
                   <Button variant="destructive" size="sm" onClick={() => onRemove(person.id)}>
-                    Remove
+                    הסרה
                   </Button>
                 </div>
               </TableCell>
