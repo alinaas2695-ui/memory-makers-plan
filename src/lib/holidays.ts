@@ -53,6 +53,7 @@ function getVetNurseDayDate(year: number): Holiday {
 // Key Jewish holidays to include (flag bitmask values)
 const JEWISH_HOLIDAY_FLAGS =
   flags.CHAG |
+  flags.EREV |
   flags.MINOR_FAST |
   flags.SPECIAL_SHABBAT |
   flags.MODERN_HOLIDAY |
