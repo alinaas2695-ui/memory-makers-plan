@@ -26,10 +26,33 @@ function getFathersDayDate(year: number): Holiday {
   return { name: "יום האב", month: 5, day: 15 };
 }
 
+// Veterinarian's Day = Last Saturday of April
+function getVeterinariansDayDate(year: number): Holiday {
+  for (let day = 30; day >= 1; day--) {
+    if (new Date(year, 3, day).getDay() === 6) {
+      return { name: "יום הווטרינר", month: 3, day };
+    }
+  }
+  return { name: "יום הווטרינר", month: 3, day: 25 };
+}
+
+// Vet Nurse and Technician's Day = 2nd Friday of October
+function getVetNurseDayDate(year: number): Holiday {
+  let fridays = 0;
+  for (let day = 1; day <= 31; day++) {
+    if (new Date(year, 9, day).getDay() === 5) {
+      fridays++;
+      if (fridays === 2) {
+        return { name: "יום האח/ות והטכנאי/ת הווטרינרי/ת", month: 9, day };
+      }
+    }
+  }
+  return { name: "יום האח/ות והטכנאי/ת הווטרינרי/ת", month: 9, day: 9 };
+}
+
 // Key Jewish holidays to include (flag bitmask values)
 const JEWISH_HOLIDAY_FLAGS =
   flags.CHAG |
-  flags.ROSH_CHODESH |
   flags.MINOR_FAST |
   flags.SPECIAL_SHABBAT |
   flags.MODERN_HOLIDAY |
@@ -38,8 +61,8 @@ const JEWISH_HOLIDAY_FLAGS =
 
 // Hebrew names map for common holidays (fallback to render('he'))
 const HEBREW_NAME_OVERRIDES: Record<string, string> = {
+  "Erev Rosh Hashana": "ערב ראש השנה",
   "Rosh Hashana": "ראש השנה",
-  "Rosh Hashana II": "ראש השנה ב׳",
   "Yom Kippur": "יום כיפור",
   "Sukkot I": "סוכות",
   "Shmini Atzeret": "שמחת תורה",
@@ -71,7 +94,12 @@ function getJewishHolidays(year: number): Holiday[] {
   const result: Holiday[] = [];
 
   for (const ev of events) {
-    const desc = ev.getDesc();
+    let desc = ev.getDesc();
+    // Normalize Rosh Hashana 1st day (which includes the year, e.g. "Rosh Hashana 5787")
+    if (desc.startsWith("Rosh Hashana ") && !desc.startsWith("Rosh Hashana II")) {
+      desc = "Rosh Hashana";
+    }
+
     // Filter to only well-known holidays we have names for
     const hebrewName = HEBREW_NAME_OVERRIDES[desc];
     if (!hebrewName) continue;
@@ -100,6 +128,8 @@ export function getHolidaysForYear(year: number): Holiday[] {
   const holidays: Holiday[] = [
     ...FIXED_HOLIDAYS,
     getFathersDayDate(year),
+    getVeterinariansDayDate(year),
+    getVetNurseDayDate(year),
     ...getJewishHolidays(year),
   ];
 
