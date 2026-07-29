@@ -58,21 +58,28 @@ const JEWISH_HOLIDAY_FLAGS =
   flags.SPECIAL_SHABBAT |
   flags.MODERN_HOLIDAY |
   flags.YOM_TOV_ENDS |
-  flags.LIGHT_CANDLES_TZEIS;
+  flags.LIGHT_CANDLES_TZEIS |
+  flags.CHOL_HAMOED;
 
 // Hebrew names map for common holidays (fallback to render('he'))
 const HEBREW_NAME_OVERRIDES: Record<string, string> = {
   "Erev Rosh Hashana": "ערב ראש השנה",
   "Rosh Hashana": "ראש השנה",
+  "Erev Yom Kippur": "ערב יום כיפור",
   "Yom Kippur": "יום כיפור",
+  "Erev Sukkot": "ערב סוכות",
   "Sukkot I": "סוכות",
+  "Sukkot VII (Hoshana Raba)": "ערב שמיני עצרת ושמחת תורה",
   "Shmini Atzeret": "שמחת תורה",
   "Simchat Torah": "שמחת תורה",
   "Chanukah: 1 Candle": "חנוכה",
   "Chanukah: 8 Candles": "חנוכה (סוף)",
   "Purim": "פורים",
+  "Erev Pesach": "ערב פסח",
   "Pesach I": "פסח",
+  "Pesach VI (CH''M)": "ערב שביעי של פסח",
   "Pesach VII": "פסח (סוף)",
+  "Erev Shavuot": "ערב שבועות",
   "Shavuot": "שבועות",
   "Tish'a B'Av": "תשעה באב",
   "Tu BiShvat": 'ט"ו בשבט',
@@ -105,11 +112,12 @@ function getJewishHolidays(year: number): Holiday[] {
     const hebrewName = HEBREW_NAME_OVERRIDES[desc];
     if (!hebrewName) continue;
 
-    // Deduplicate (e.g. Simchat Torah + Shmini Atzeret same day)
-    if (seen.has(hebrewName)) continue;
-    seen.add(hebrewName);
-
     const gregDate = ev.getDate().greg();
+    const key = `${hebrewName}:${gregDate.getMonth()}:${gregDate.getDate()}`;
+    // Deduplicate (e.g. Simchat Torah + Shmini Atzeret on same day)
+    if (seen.has(key)) continue;
+    seen.add(key);
+
     result.push({
       name: hebrewName,
       month: gregDate.getMonth(),   // 0-indexed
