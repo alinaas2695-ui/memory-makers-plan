@@ -113,8 +113,10 @@ function getJewishHolidays(year: number): Holiday[] {
     if (!hebrewName) continue;
 
     const gregDate = ev.getDate().greg();
-    const month = gregDate.getUTCMonth();
-    const day = gregDate.getUTCDate();
+    // Hebcal returns local-midnight dates. UTC getters shift Israeli dates
+    // backwards by one day, so use the local calendar fields.
+    const month = gregDate.getMonth();
+    const day = gregDate.getDate();
     const key = `${hebrewName}:${month}:${day}`;
     // Deduplicate (e.g. Simchat Torah + Shmini Atzeret on same day)
     if (seen.has(key)) continue;

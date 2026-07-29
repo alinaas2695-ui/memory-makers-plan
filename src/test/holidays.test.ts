@@ -24,7 +24,7 @@ describe("Holiday eves support", () => {
 
     const erevPesach = holidays.find((h) => h.name === "ערב פסח");
     expect(erevPesach).toBeDefined();
-    // 2026 Erev Pesach is March 31, 2026 (month 2 in 0-indexed JS month, day 31)
-    expect(erevPesach).toEqual({ name: "ערב פסח", month: 2, day: 31 });
+    // 2026 Erev Pesach is April 1, 2026 (month 3 in 0-indexed JS month)
+    expect(erevPesach).toEqual({ name: "ערב פסח", month: 3, day: 1 });
   });
 });
